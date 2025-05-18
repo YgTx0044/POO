@@ -3,7 +3,6 @@ import json
 INVENTARIO = "inventario.json"
 
 def cargar_inventario():
-    """Carga la lista de medicamentos desde el JSON."""
     try:
         with open(INVENTARIO, "r", encoding="utf-8") as file:
             return json.load(file)
@@ -11,12 +10,10 @@ def cargar_inventario():
         return []  # Si el archivo no existe, se inicia con una lista vacía
 
 def guardar_inventario(inventario):
-    """Guarda la lista de medicamentos en el JSON."""
     with open(INVENTARIO, "w", encoding="utf-8") as file:
         json.dump(inventario, file, indent=4)
 
 def eliminar_medicamento(nombre):
-    """Elimina un medicamento del inventario sin detener el flujo si no existe."""
     inventario = cargar_inventario()
 
     # Filtrar los medicamentos que NO coincidan con el nombre dado
@@ -29,7 +26,6 @@ def eliminar_medicamento(nombre):
     print(f"✅ Medicamento '{nombre}' eliminado correctamente.")
 
 def agregar_medicamento(medicamento):
-    """Agrega un nuevo medicamento al inventario evitando duplicados."""
     inventario = cargar_inventario()
 
     # 🔥 Verificar si ya existe el medicamento
@@ -42,7 +38,6 @@ def agregar_medicamento(medicamento):
     print(f"✅ Medicamento '{medicamento.nombre}' agregado exitosamente.")
 
 def ver_inventario():
-    """Muestra la lista de medicamentos disponibles."""
     inventario = cargar_inventario()
     if not inventario:
         print("⚠️ No hay medicamentos registrados.")
@@ -51,7 +46,6 @@ def ver_inventario():
         print(f"💊 {item['nombre']} - Precio: ${item['precio']}, Stock: {item['stock']}")
 
 def vender_medicamento(nombre, cantidad):
-    """Vende un medicamento si hay suficiente stock y la cantidad es válida."""
     inventario = cargar_inventario()
 
     for item in inventario:
@@ -71,7 +65,6 @@ def vender_medicamento(nombre, cantidad):
     print(f"⚠️ Medicamento '{nombre}' no encontrado en el inventario.")
 
 def modificar_precio(nombre, nuevo_precio):
-    """Modifica el precio de un medicamento en el JSON sin detener la ejecución si es inválido."""
     if nuevo_precio <= 0:
         print("⚠️ No se puede asignar un precio menor o igual a 0.")
         return  
@@ -88,7 +81,6 @@ def modificar_precio(nombre, nuevo_precio):
     print(f"⚠️ No se encontró el medicamento '{nombre}' en el inventario.")
 
 def modificar_stock(nombre, nuevo_stock):
-    """Modifica el stock de un medicamento en el JSON sin eliminarlo si llega a 0."""
     if nuevo_stock < 0:
         print("⚠️ No se puede asignar un stock negativo.")
         return  # No detiene la ejecución
