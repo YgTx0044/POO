@@ -3,35 +3,31 @@ import json
 MEDICOS = "medicos.json"
 
 def cargar_medicos():
-    """Carga la lista de médicos desde el JSON."""
     try:
         with open(MEDICOS, "r", encoding="utf-8") as file:
             return json.load(file)
     except FileNotFoundError:
-        return []  # 🔥 Si no existe el archivo, devuelve una lista vacía
+        return []  # Si no existe el archivo, devuelve una lista vacía
 
 def guardar_medicos(medicos):
-    """Guarda la lista de médicos en el JSON."""
     with open(MEDICOS, "w", encoding="utf-8") as file:
         json.dump(medicos, file, indent=4)
 
 def agregar_medico(medico):
-    """Agrega un médico solo si no está repetido en el JSON."""
     medicos = cargar_medicos()
     
-    # 🔥 Verificar si ya existe un médico con el mismo nombre
+    # Verificar si ya existe un médico con el mismo nombre
     for m in medicos:
         if m["nombre"] == medico.nombre:
             print(f"⚠️ El médico '{medico.nombre}' ya está registrado.")
             return
     
-    medicos.append(medico.datos_doctor())  # ✅ Si no está repetido, lo agrega
+    medicos.append(medico.datos_doctor())  # Si no está repetido, lo agrega
     guardar_medicos(medicos)
     print(f"✅ Médico '{medico.nombre}' registrado exitosamente.")
 
 
 def ver_medicos():
-    """Muestra la lista de médicos registrados."""
     medicos = cargar_medicos()
     if not medicos:
         print("⚠️ No hay médicos registrados.")
