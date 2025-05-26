@@ -21,4 +21,3 @@ class Inventario:
             "precio": self.precio,
             "stock": self.stock
         }
-    
