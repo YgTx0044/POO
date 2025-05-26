@@ -5,12 +5,6 @@ class Medico(Persona):
         super().__init__(nombre, edad, genero)
         self.especialidad =especialidad
 
-    def ver_reporte_paciente(self, nombre):
-        pass
-
-    def crear_reporte(self, diagnostico, medicamentos):
-        pass
-
     def datos_doctor(self):
         return {
             "nombre": self.nombre,
@@ -18,4 +12,3 @@ class Medico(Persona):
             "genero": self.genero,
             "especialidad": self.especialidad
         }
-    
